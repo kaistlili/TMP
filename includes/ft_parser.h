@@ -18,21 +18,24 @@
 
 #define CMD 2
 #define SEP 1
-#define PIPE 0
-
-enum e_type{
-	undef = 0,
-	O_AND = 1,
-	O_OR = 2,
-	O_SEP = 3,
-	R_LEFT = 4,
-	R_RIGHT = 5,
-	R_DLEFT = 6,
-	R_DRIGHT = 7,
-	CMD_ = 8,
-	OPTION = 9,
-	PATH = 10 
-};
+#define PIPE 
+//  invalid write dans eval_line.c ligne 164 et 146 si ya que des 
+// espaces ou si ya des espaces vers la fin, c'est un peu random
+ 
+enum e_type{ /* les pipes? les quotes " et ' c'est a gerer a 
+                            ce niveau aussi*/
+      undef = 0,
+      O_AND = 1, // comme ;
+      O_OR = 2, // comme ;
+      O_SEP = 3, // plus qu'un ; sont reconnu comme undef
+      R_LEFT = 4,
+      R_RIGHT = 5,
+      R_DLEFT = 6,
+      R_DRIGHT = 7,
+      CMD_ = 8, // les cmd sont reconnu comme O_OR
+      OPTION = 9, // pas besoin de reconnaitre les options. sinon on 
+      PATH = 10  // oblige de gerer les -- 
+  };
 
 typedef struct s_word
 {
